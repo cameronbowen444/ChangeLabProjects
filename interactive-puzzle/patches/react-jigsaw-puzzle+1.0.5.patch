@@ -1,0 +1,26 @@
+diff --git a/node_modules/react-jigsaw-puzzle/lib/jigsaw-puzzle.js b/node_modules/react-jigsaw-puzzle/lib/jigsaw-puzzle.js
+index db9dbb3..356baed 100644
+--- a/node_modules/react-jigsaw-puzzle/lib/jigsaw-puzzle.js
++++ b/node_modules/react-jigsaw-puzzle/lib/jigsaw-puzzle.js
+@@ -140,7 +140,7 @@ var JigsawPuzzle = function (_a) {
+         var _a, _b;
+         if (draggingTile.current) {
+             event.stopPropagation();
+-            event.preventDefault();
++            // event.preventDefault();
+             var eventPos = {
+                 x: (_a = event.pageX) !== null && _a !== void 0 ? _a : event.touches[0].pageX,
+                 y: (_b = event.pageY) !== null && _b !== void 0 ? _b : event.touches[0].pageY
+@@ -185,10 +185,10 @@ var JigsawPuzzle = function (_a) {
+     }, [draggingTile, setTiles, rootSize, onSolved]);
+     return react_1.default.createElement("div", { ref: onRootElementRendered, onTouchMove: onRootMouseMove, onMouseMove: onRootMouseMove, onTouchEnd: onRootMouseUp, onMouseUp: onRootMouseUp, onTouchCancel: onRootMouseUp, onMouseLeave: onRootMouseUp, className: "jigsaw-puzzle", style: { height: !calculatedHeight ? undefined : "".concat(calculatedHeight, "px") }, onDragEnter: function (event) {
+             event.stopPropagation();
+-            event.preventDefault();
++            // event.preventDefault();
+         }, onDragOver: function (event) {
+             event.stopPropagation();
+-            event.preventDefault();
++            // event.preventDefault();
+         } }, tiles && rootSize && imageSize && tiles.map(function (tile) {
+         return react_1.default.createElement("div", { draggable: false, onMouseDown: function (event) { return onTileMouseDown(tile, event); }, onTouchStart: function (event) { return onTileMouseDown(tile, event); }, key: tile.correctPosition, className: "jigsaw-puzzle__piece ".concat(tile.solved ? ' jigsaw-puzzle__piece--solved' : '', " "), style: {
+                 position: 'absolute',

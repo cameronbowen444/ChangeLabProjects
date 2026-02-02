@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Playwrite NZ Basic", cursive;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(211, 228, 243);
+}
+.App {
+  text-align: center;
+  margin: 10px;
+}
+.App h1 {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  color: white; 
+}
+
+.App p{
+  margin-bottom: 20px;
+  color: rgb(169, 169, 169);
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: black;
+}
+
+.board {
+  border: 1.5px solid black;
+  max-width: 450px;
+  margin: auto;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.jigsaw-puzzle{
+  border: 1.5px solid white;
+  border-radius: 5px;
+  overflow: hidden;
+  
+}
+
+.jigsaw-puzzle__piece {
+  border: 1.5px solid rgb(255, 255, 255) !important;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.jigsaw-puzzle__piece--solved {
+  animation: pop .30s ease-in-out;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+
+.jigsaw-puzzle__piece--dragging {
+
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.20);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.modal {
+  padding: 0;
+  position: fixed;
+  font-family: "Poppins", sans-serif;
+}
+
+.modal[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  border: none;
+}
+
+.modal-content {
+  background-color: rgb(120, 167, 255);
+  color: white;
+  margin-top: -80px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.modal-content h2 {
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.modal-content p {
+  margin-bottom: 5px;
+}
+.modal-content button {
+  border: none;
+  margin: 10px;
+  padding: 8px 15px;
+  background-color: #2d5c8f;
+  color: white;
+  
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.501);
+}
