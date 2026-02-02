@@ -17,8 +17,8 @@ const Board = () => {
     <div className='board'>
       <JigsawPuzzle
         imageSrc={puzzle}
-        rows={2}
-        columns={2}
+        rows={5}
+        columns={5}
         onSolved={() => setTimeout(() => {
           setIsOpen(true);
         })}
