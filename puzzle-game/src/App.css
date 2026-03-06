@@ -27,8 +27,8 @@ body {
 }
 
 .puzzle-container {
-  width: min(92vw, 460px);
-  height: min(92vw, 550px);
+  width: min(96vw, 460px);
+  height: min(96vw, 550px);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
@@ -41,11 +41,14 @@ body {
 
 @media screen and (max-width: 550px) {
   .puzzle-container {
-    width: min(92vw, 300px);
-    height: min(92vw, 450px);
+    width: min(96vw, 300px);
+    height: min(96vw, 450px);
   }
   .title {
     font-size: 2rem;
+  }
+  .modal-content h2 {
+    font-size: 1.5rem;
   }
 }
 
@@ -90,7 +93,7 @@ body {
   border: 2px solid rgba(0, 55, 255, 0.6);
 }
 
-.modal {
+/* .modal {
   padding: 0;
   position: fixed;
   font-family: "Poppins", sans-serif;
@@ -133,6 +136,72 @@ body {
 
 .modal::backdrop {
   background: rgba(0, 0, 0, 0.644);
+} */
+
+.modal {
+  border: none ;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.624);
+  color: white;
+  margin: 0 auto;
+}
+
+.modal[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  border: none;
+  outline: none;
+
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0);
+}
+
+.modal-content {
+  position: relative;
+  text-align: center;
+  margin-top: -30%;
+}
+
+.modal-content h2 {
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  background-color: rgb(13, 50, 80);
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid white;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.confetti-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  border-radius: 2px;
+}
+
+.confetti-piece:nth-child(4n) {
+  background: #ff4d6d;
+}
+.confetti-piece:nth-child(4n + 1) {
+  background: #ffd166;
+}
+.confetti-piece:nth-child(4n + 2) {
+  background: #06d6a0;
+}
+.confetti-piece:nth-child(4n + 3) {
+  background: #118ab2;
 }
 
 .new {
@@ -150,7 +219,7 @@ body {
 }
 .button {
   width: 100%;
-  margin: 10px;
+  margin: 10px 3px;
   padding: 10px;
   border: none;
   background-color: #2d5c8f;
@@ -160,16 +229,18 @@ body {
 
 .custom-select {
   width: 100%;
+  padding: 5px;
 }
 
 .custom-select select {
-  appearance: none;
   width: 100%;
-  margin: 10px;
+  margin: 10px -10px;
   padding: 10px;
   background-color: #fff;
   border: 1px solid #caced1;
   border-radius: 0.25rem;
   color: #000;
   cursor: pointer;
+  outline: none;
 }
+

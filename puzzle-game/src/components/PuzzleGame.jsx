@@ -18,16 +18,25 @@ const PuzzleGame = () => {
   const [boardSize, setBoardSize] = useState({ w: 0, h: 0 });
   const [puzzle, setPuzzle] = useState(puzzles["puzzle1"]);
   const [selectedPuzzle, setSelectedPuzzle] = useState("puzzle1");
+  const [isReady, setIsReady] = useState(false);
 
   const boardRef = useRef(null);
+  const hasStarted = useRef(false);
 
   useEffect(() => {
-    setPositions((prevPositions) => {
-      const newPos = [...prevPositions];
+  setPositions((prevPositions) => {
+    let newPos = [...prevPositions];
+
+    do {
+      newPos = [...prevPositions];
       newPos.sort(() => Math.random() - 0.5);
-      return newPos;
-    });
-  }, []);
+    } while (newPos.every((value, index) => value === index)); // avoid solved start
+
+    return newPos;
+  });
+
+  setIsReady(true);
+}, []);
 
   // Measure board size responsively
   useEffect(() => {
@@ -58,11 +67,13 @@ const PuzzleGame = () => {
   }, [positions]);
 
   useEffect(() => {
-    if (isWin) {
-      setWon(true);
-      setIsOpen(true);
-    }
-  }, [isWin]);
+  if (!isReady) return;
+
+  if (isWin) {
+    setWon(true);
+    setIsOpen(true);
+  }
+}, [isWin, isReady]);
 
   const handleClose = () => setIsOpen(false);
 
@@ -255,7 +266,7 @@ const PuzzleGame = () => {
 
   return (
     <>
-      {!won && <Modal isOpen={isOpen} onClose={handleClose} />}
+      {won && <Modal isOpen={isOpen} onClose={handleClose} />}
       <PuzzleDragLayer />
       <div className="game-container">
         <div
