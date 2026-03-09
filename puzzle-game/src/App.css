@@ -155,7 +155,8 @@ body {
   background: transparent;
   border: none;
   outline: none;
-
+  position: fixed;
+  overflow: hidden;
 }
 
 .modal::backdrop {

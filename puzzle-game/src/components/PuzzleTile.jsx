@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 const ItemTypes = { TILE: "TILE" };
 
 const PuzzleTile = ({
@@ -132,15 +132,14 @@ const PuzzleTile = ({
         scale: inGroup ? 1 : 0.93,
       }}
       transition={{
-        x: { type: "spring", stiffness: 350, damping: 30, mass: 1.0 },
-        y: { type: "spring", stiffness: 350, damping: 30, mass: 1.0 },
-        scale: { duration: 0.4, ease: "easeOut" },
+        x: { type: "spring", stiffness: 260, damping: 28, mass: 1.1 },
+        y: { type: "spring", stiffness: 260, damping: 28, mass: 1.1 },
+        scale: { duration: 0.2, ease: "easeOut" },
       }}
       style={{
         width: inGroup ? tileW + 1 : tileW,
         height: inGroup ? tileH + 1 : tileH,
         zIndex: isDraggingGroup ? 999 : isOver ? 50 : 1,
-        transform: "translateZ(0)",
         backgroundImage: `url('${puzzle}')`,
         backgroundSize: `${boardSize.w}px ${boardSize.h}px`,
         backgroundPosition: `-${x}px -${y}px`,

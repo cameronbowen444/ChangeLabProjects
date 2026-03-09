@@ -21,7 +21,6 @@ const PuzzleGame = () => {
   const [isReady, setIsReady] = useState(false);
 
   const boardRef = useRef(null);
-  const hasStarted = useRef(false);
 
   useEffect(() => {
   setPositions((prevPositions) => {
@@ -214,7 +213,7 @@ const PuzzleGame = () => {
     const centerY = (r + 0.5) * tileH;
     const dist = Math.hypot(x - centerX, y - centerY);
 
-    const tolerance = 0.85 * Math.min(tileW, tileH); // tweak 0.6–0.9
+    const tolerance = 0.90 * Math.min(tileW, tileH); // tweak 0.6–0.9
     if (dist > tolerance) return null;
 
     return r * GRID + c;
