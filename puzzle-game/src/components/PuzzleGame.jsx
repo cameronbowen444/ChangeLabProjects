@@ -25,8 +25,9 @@ const PuzzleGame = () => {
   return (
     <>
       {won && <Modal isOpen={isOpen} onClose={handleClose} />}
-      <PuzzleDragLayer />
 
+
+      <PuzzleDragLayer />
       <div className="game-container">
         <PuzzleBoard
           GRID={GRID}

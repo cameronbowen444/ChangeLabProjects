@@ -54,7 +54,6 @@ const usePuzzleGame = () => {
         ),
       );
 
-      setPositions((prev) => shufflePositionsArray(prev));
       setIsReady(true);
     } catch (error) {
       console.error("Image preload failed:", error);

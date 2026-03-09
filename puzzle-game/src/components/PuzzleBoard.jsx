@@ -36,7 +36,6 @@ const PuzzleBoard = ({
 
   const usedW = tileW * GRID;
   const usedH = tileH * GRID;
-  
 
   const nearestSlotFromClientOffset = (pt) => {
     if (!pt || !boardRef.current) return null;
@@ -84,35 +83,35 @@ const PuzzleBoard = ({
         boardDropRef(node);
       }}
     >
-          <div
-      className="puzzle-grid"
-      style={{
-        width: usedW,
-        height: usedH,
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-      }}
-    >
-      {positions.map((pieceId, slotIndex) => (
-        <PuzzleTile
-          key={pieceId}
-          slotIndex={slotIndex}
-          pieceId={pieceId}
-          draggingSlot={draggingSlot}
-          setDraggingSlot={setDraggingSlot}
-          swapClusterToSlot={swapClusterToSlot}
-          puzzle={puzzle}
-          boardSize={{ w: usedW, h: usedH }}
-          GRID={GRID}
-          tileW={tileW}
-          tileH={tileH}
-          groups={groups}
-          positions={positions}
-        />
-      ))}
-    </div>
+      <div
+        className="puzzle-grid"
+        style={{
+          width: usedW,
+          height: usedH,
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        {positions.map((pieceId, slotIndex) => (
+          <PuzzleTile
+            key={pieceId}
+            slotIndex={slotIndex}
+            pieceId={pieceId}
+            draggingSlot={draggingSlot}
+            setDraggingSlot={setDraggingSlot}
+            swapClusterToSlot={swapClusterToSlot}
+            puzzle={puzzle}
+            boardSize={{ w: usedW, h: usedH }}
+            GRID={GRID}
+            tileW={tileW}
+            tileH={tileH}
+            groups={groups}
+            positions={positions}
+          />
+        ))}
+      </div>
     </div>
   );
 };
