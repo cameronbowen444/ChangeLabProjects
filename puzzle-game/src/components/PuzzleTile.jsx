@@ -117,6 +117,18 @@ const PuzzleTile = ({
   const isDraggingGroup =
     draggingGroupId != null && draggingGroupId === groupId;
 
+  const edgeShadow = inGroup
+    ? [
+        borders.top && "inset 0 1px 0 0 rgba(0,0,0,0.85)",
+        borders.bottom && "inset 0 -1px 0 0 rgba(0,0,0,0.85)",
+        borders.left && "inset 1px 0 0 0 rgba(0,0,0,0.85)",
+        borders.right && "inset -1px 0 0 0 rgba(0,0,0,0.85)",
+      ]
+        .filter(Boolean)
+        .join(", ")
+    : "inset 0 0 0 1px rgba(0,0,0,0.3)";
+    // IF GIVING PROBLEMS with look, change above to ""
+
   return (
     <motion.div
       ref={ref}
@@ -137,19 +149,16 @@ const PuzzleTile = ({
         scale: { duration: 0.2, ease: "easeOut" },
       }}
       style={{
-        width: inGroup ? tileW + 1 : tileW,
-        height: inGroup ? tileH + 1 : tileH,
+        width: tileW,
+        height: tileH,
+        boxSizing: "border-box",
         zIndex: isDraggingGroup ? 999 : isOver ? 50 : 1,
         backgroundImage: `url('${puzzle}')`,
         backgroundSize: `${boardSize.w}px ${boardSize.h}px`,
         backgroundPosition: `-${x}px -${y}px`,
         opacity: isDraggingGroup ? 0 : 1,
-        ...(inGroup && {
-          borderTop: borders.top ? "1.5px solid black" : "none",
-          borderBottom: borders.bottom ? "1.5px solid black" : "none",
-          borderLeft: borders.left ? "1.5px solid black" : "none",
-          borderRight: borders.right ? "1.5px solid black" : "none",
-        }),
+        boxShadow: edgeShadow,
+        willChange: "transform",
       }}
     />
   );
