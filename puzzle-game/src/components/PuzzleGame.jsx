@@ -41,8 +41,8 @@ const PuzzleGame = () => {
 
         <div className="puzzle-selection">
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.8 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
             className="button"
             onClick={randomPuzzle}
           >
@@ -50,7 +50,8 @@ const PuzzleGame = () => {
           </motion.button>
 
           <div className="custom-select">
-            <select
+            <motion.select
+              whileHover={{ scale: 1.02 }}
               id="puzzle"
               name="puzzle"
               value={selectedPuzzle}
@@ -65,7 +66,7 @@ const PuzzleGame = () => {
               <option value="puzzle7">Puzzle 7</option>
               <option value="puzzle8">Puzzle 8</option>
               <option value="puzzle9">Puzzle 9</option>
-            </select>
+            </motion.select>
           </div>
         </div>
       </div>

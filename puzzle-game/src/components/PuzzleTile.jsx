@@ -119,14 +119,14 @@ const PuzzleTile = ({
 
   const edgeShadow = inGroup
     ? [
-        borders.top && "inset 0 1px 0 0 rgba(0,0,0,0.85)",
-        borders.bottom && "inset 0 -1px 0 0 rgba(0,0,0,0.85)",
-        borders.left && "inset 1px 0 0 0 rgba(0,0,0,0.85)",
-        borders.right && "inset -1px 0 0 0 rgba(0,0,0,0.85)",
+        borders.top && "inset 0 1px 0 0 rgba(50, 50, 50, 0.8)",
+        borders.bottom && "inset 0 -1px 0 0 rgba(50, 50, 50, 0.8)",
+        borders.left && "inset 1px 0 0 0 rgba(50, 50, 50, 0.8)",
+        borders.right && "inset -1px 0 0 0 rgba(50, 50, 50, 0.8)",
       ]
         .filter(Boolean)
         .join(", ")
-    : "inset 0 0 0 1px rgba(0,0,0,0.3)";
+    : "inset 0 0 0 1px rgba(22, 22, 22, 0.8)";
     // IF GIVING PROBLEMS with look, change above to ""
 
   return (
@@ -144,13 +144,13 @@ const PuzzleTile = ({
         scale: inGroup ? 1 : 0.93,
       }}
       transition={{
-        x: { type: "spring", stiffness: 260, damping: 28, mass: 1.1 },
-        y: { type: "spring", stiffness: 260, damping: 28, mass: 1.1 },
+        x: { type: "tween", stiffness: 260, damping: 28, mass: 1.1 },
+        y: { type: "tween", stiffness: 260, damping: 28, mass: 1.1 },
         scale: { duration: 0.2, ease: "easeOut" },
       }}
       style={{
-        width: tileW,
-        height: tileH,
+        width: tileW + 1,
+        height: tileH + 1,
         boxSizing: "border-box",
         zIndex: isDraggingGroup ? 999 : isOver ? 50 : 1,
         backgroundImage: `url('${puzzle}')`,

@@ -64,6 +64,7 @@ const Modal = ({ isOpen, onClose }) => {
           animate={{ opacity: [0, 1, 1, 1, 0] }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2.0, ease: "easeOut" }}
+          className="title"
         >
           Puzzle Completed!
         </motion.h2>
