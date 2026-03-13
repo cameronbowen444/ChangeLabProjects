@@ -13,9 +13,11 @@ const usePuzzleGame = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [won, setWon] = useState(false);
   const [draggingSlot, setDraggingSlot] = useState(null);
-  const [puzzle, setPuzzle] = useState(puzzles["puzzle1"]);
+  const [puzzle, setPuzzle] = useState(puzzles["puzzle1"].image);
   const [selectedPuzzle, setSelectedPuzzle] = useState("puzzle1");
   const [isReady, setIsReady] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const [hintActive, setHintActive] = useState(false);
 
   useEffect(() => {
     setPositions((prevPositions) => shufflePositionsArray(prevPositions));
@@ -49,7 +51,7 @@ const usePuzzleGame = () => {
               const img = new Image();
               img.onload = resolve;
               img.onerror = reject;
-              img.src = src;
+              img.src = src.image;
             }),
         ),
       );
@@ -86,9 +88,9 @@ const usePuzzleGame = () => {
 
   const handlePuzzleSelect = async (value) => {
     try {
-    await loadImage(puzzles[value]);
+    await loadImage(puzzles[value].image);
     setSelectedPuzzle(value);
-    setPuzzle(puzzles[value]);
+    setPuzzle(puzzles[value].image);
     setWon(false);
     setIsOpen(false);
     setPositions((prev) => shufflePositionsArray(prev));
@@ -114,6 +116,19 @@ const usePuzzleGame = () => {
     handlePuzzleSelect(nextKey);
   };
 
+
+  const triggerHint = () => {
+    if (hintActive) return; // block new hints
+
+    setHintActive(true);
+    setShowHint(true);
+
+    setTimeout(() => {
+      setHintActive(false)
+      setShowHint(false);
+    }, 2000);
+  }
+
   return {
     GRID,
     positions,
@@ -130,6 +145,9 @@ const usePuzzleGame = () => {
     randomPuzzle,
     setPositions,
     shuffleBoard,
+    showHint, 
+    triggerHint,
+    hintActive,
   };
 };
 

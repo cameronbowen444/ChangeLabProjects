@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDrop } from "react-dnd";
 import PuzzleTile from "./PuzzleTile";
+import { motion, AnimatePresence } from "framer-motion";
 
 const PuzzleBoard = ({
   GRID,
@@ -10,6 +11,7 @@ const PuzzleBoard = ({
   swapClusterToSlot,
   puzzle,
   groups,
+  showHint,
 }) => {
   const [boardSize, setBoardSize] = useState({ w: 0, h: 0 });
   const boardRef = useRef(null);
@@ -83,6 +85,25 @@ const PuzzleBoard = ({
         boardDropRef(node);
       }}
     >
+      <AnimatePresence>
+      {showHint && (
+        <motion.div
+          className="puzzle-hint"
+          style={{
+            backgroundImage: `url(${puzzle})`,
+            backgroundSize: `${usedW}px ${usedH}px`,
+            width: usedW,
+            height: usedH,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.75 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            opacity: { duration: 0.5, ease: "easeOut" },
+          }}
+        />
+      )}
+      </AnimatePresence>
       <div
         className="puzzle-grid"
         style={{

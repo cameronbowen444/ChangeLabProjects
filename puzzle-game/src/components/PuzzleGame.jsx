@@ -4,6 +4,10 @@ import PuzzleDragLayer from "./PuzzleDragLayer";
 import PuzzleBoard from "./PuzzleBoard";
 import { motion } from "framer-motion";
 import usePuzzleGame from "../hooks/usePuzzleGame";
+import { puzzles } from "../util/data";
+import { FaShuffle } from "react-icons/fa6";
+import { HiOutlineLightBulb } from "react-icons/hi";
+import { MdOutlineRestartAlt } from "react-icons/md";
 
 const PuzzleGame = () => {
   const {
@@ -20,6 +24,10 @@ const PuzzleGame = () => {
     swapClusterToSlot,
     handlePuzzleSelect,
     randomPuzzle,
+    showHint,
+    triggerHint,
+    shuffleBoard,
+    hintActive
   } = usePuzzleGame();
 
   return (
@@ -37,17 +45,10 @@ const PuzzleGame = () => {
           swapClusterToSlot={swapClusterToSlot}
           puzzle={puzzle}
           groups={groups}
+          showHint={showHint}
         />
 
         <div className="puzzle-selection">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.9 }}
-            className="button"
-            onClick={randomPuzzle}
-          >
-            <p>Random</p>
-          </motion.button>
 
           <div className="custom-select">
             <motion.select
@@ -56,18 +57,47 @@ const PuzzleGame = () => {
               name="puzzle"
               value={selectedPuzzle}
               onChange={(e) => handlePuzzleSelect(e.target.value)}
+              disabled={hintActive}
             >
-              <option value="puzzle1">Puzzle 1</option>
-              <option value="puzzle2">Puzzle 2</option>
-              <option value="puzzle3">Puzzle 3</option>
-              <option value="puzzle4">Puzzle 4</option>
-              <option value="puzzle5">Puzzle 5</option>
-              <option value="puzzle6">Puzzle 6</option>
-              <option value="puzzle7">Puzzle 7</option>
-              <option value="puzzle8">Puzzle 8</option>
-              <option value="puzzle9">Puzzle 9</option>
+              {Object.values(puzzles).map((puzzleObj) => (
+                <option key={puzzleObj.id} value={puzzleObj.id}>
+                  {puzzleObj.title}
+                </option>
+              ))}
             </motion.select>
           </div>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
+            className="button"
+            onClick={randomPuzzle}
+            disabled={hintActive}
+          >
+            <p><FaShuffle /></p>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
+            className="button"
+            onClick={triggerHint}
+            disabled={hintActive}
+          >
+            <p><HiOutlineLightBulb /></p>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
+            className="button"
+            onClick={shuffleBoard}
+            disabled={hintActive}
+          >
+            <p><MdOutlineRestartAlt /></p>
+          </motion.button>
+        </div>
+        
+        <div className="puzzle-info">
+            <h2>{puzzles[selectedPuzzle].title}</h2>
+            <p>{puzzles[selectedPuzzle].description}</p>
         </div>
       </div>
     </>
