@@ -8,8 +8,12 @@ import { puzzles } from "../util/data";
 import { FaShuffle } from "react-icons/fa6";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { MdOutlineRestartAlt } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
 const PuzzleGame = () => {
+  const location = useLocation();
+  const puzzleIdFromHome = location.state?.puzzleId || "puzzle1";
+
   const {
     GRID,
     positions,
@@ -27,13 +31,12 @@ const PuzzleGame = () => {
     showHint,
     triggerHint,
     shuffleBoard,
-    hintActive
-  } = usePuzzleGame();
+    hintActive,
+  } = usePuzzleGame(puzzleIdFromHome);
 
   return (
     <>
       {won && <Modal isOpen={isOpen} onClose={handleClose} />}
-
 
       <PuzzleDragLayer />
       <div className="game-container">
@@ -49,7 +52,6 @@ const PuzzleGame = () => {
         />
 
         <div className="puzzle-selection">
-
           <div className="custom-select">
             <motion.select
               whileHover={{ scale: 1.02 }}
@@ -61,7 +63,7 @@ const PuzzleGame = () => {
             >
               {Object.values(puzzles).map((puzzleObj) => (
                 <option key={puzzleObj.id} value={puzzleObj.id}>
-                  {puzzleObj.title}
+                  {puzzleObj.name}
                 </option>
               ))}
             </motion.select>
@@ -73,7 +75,9 @@ const PuzzleGame = () => {
             onClick={randomPuzzle}
             disabled={hintActive}
           >
-            <p><FaShuffle /></p>
+            <p>
+              <FaShuffle />
+            </p>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -82,7 +86,9 @@ const PuzzleGame = () => {
             onClick={triggerHint}
             disabled={hintActive}
           >
-            <p><HiOutlineLightBulb /></p>
+            <p>
+              <HiOutlineLightBulb />
+            </p>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -91,13 +97,15 @@ const PuzzleGame = () => {
             onClick={shuffleBoard}
             disabled={hintActive}
           >
-            <p><MdOutlineRestartAlt /></p>
+            <p>
+              <MdOutlineRestartAlt />
+            </p>
           </motion.button>
         </div>
-        
+
         <div className="puzzle-info">
-            <h2>{puzzles[selectedPuzzle].title}</h2>
-            <p>{puzzles[selectedPuzzle].description}</p>
+          <h2>{puzzles[selectedPuzzle].title}</h2>
+          <p>{puzzles[selectedPuzzle].description}</p>
         </div>
       </div>
     </>

@@ -8,21 +8,26 @@ import {
   shufflePositionsArray,
 } from "../game/puzzleUtils";
 
-const usePuzzleGame = () => {
+const usePuzzleGame = (initialPuzzleId = "puzzle1") => {
   const [positions, setPositions] = useState([...Array(GRID * GRID).keys()]);
   const [isOpen, setIsOpen] = useState(false);
   const [won, setWon] = useState(false);
   const [draggingSlot, setDraggingSlot] = useState(null);
-  const [puzzle, setPuzzle] = useState(puzzles["puzzle1"].image);
-  const [selectedPuzzle, setSelectedPuzzle] = useState("puzzle1");
+  const [puzzle, setPuzzle] = useState(puzzles[initialPuzzleId].image);
+  const [selectedPuzzle, setSelectedPuzzle] = useState(initialPuzzleId);
   const [isReady, setIsReady] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [hintActive, setHintActive] = useState(false);
 
   useEffect(() => {
-    setPositions((prevPositions) => shufflePositionsArray(prevPositions));
-    setIsReady(true);
-  }, []);
+    if (!puzzles[initialPuzzleId]) return;
+
+    setSelectedPuzzle(initialPuzzleId);
+    setPuzzle(puzzles[initialPuzzleId].image);
+    setWon(false);
+    setIsOpen(false);
+    setPositions((prev) => shufflePositionsArray(prev));
+  }, [initialPuzzleId]);
 
   const groups = useMemo(() => {
     return buildGroups(positions);
@@ -40,35 +45,37 @@ const usePuzzleGame = () => {
       setIsOpen(true);
     }
   }, [isWin, isReady]);
-  
+
   useEffect(() => {
-  const preloadAll = async () => {
-    try {
-      await Promise.all(
-        Object.values(puzzles).map(
-          (src) =>
-            new Promise((resolve, reject) => {
-              const img = new Image();
-              img.onload = resolve;
-              img.onerror = reject;
-              img.src = src.image;
-            }),
-        ),
-      );
+    const preloadAll = async () => {
+      try {
+        await Promise.all(
+          Object.values(puzzles).map(
+            (src) =>
+              new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = resolve;
+                img.onerror = reject;
+                img.src = src.image;
+              }),
+          ),
+        );
 
-      setIsReady(true);
-    } catch (error) {
-      console.error("Image preload failed:", error);
-    }
-  };
+        setIsReady(true);
+      } catch (error) {
+        console.error("Image preload failed:", error);
+      }
+    };
 
-  preloadAll();
-}, []);
+    preloadAll();
+  }, []);
 
   const handleClose = () => setIsOpen(false);
 
   const swapClusterToSlot = (fromSlot, toSlot) => {
-    setPositions((prev) => moveClusterPositions(prev, fromSlot, toSlot, groups));
+    setPositions((prev) =>
+      moveClusterPositions(prev, fromSlot, toSlot, groups),
+    );
   };
 
   const shuffleBoard = () => {
@@ -78,25 +85,25 @@ const usePuzzleGame = () => {
   };
 
   const loadImage = (src) => {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(src);
-    img.onerror = reject;
-    img.src = src;
-  });
-};
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(src);
+      img.onerror = reject;
+      img.src = src;
+    });
+  };
 
   const handlePuzzleSelect = async (value) => {
     try {
-    await loadImage(puzzles[value].image);
-    setSelectedPuzzle(value);
-    setPuzzle(puzzles[value].image);
-    setWon(false);
-    setIsOpen(false);
-    setPositions((prev) => shufflePositionsArray(prev));
-  } catch (error) {
-    console.error("Failed to load puzzle image:", error);
-  }
+      await loadImage(puzzles[value].image);
+      setSelectedPuzzle(value);
+      setPuzzle(puzzles[value].image);
+      setWon(false);
+      setIsOpen(false);
+      setPositions((prev) => shufflePositionsArray(prev));
+    } catch (error) {
+      console.error("Failed to load puzzle image:", error);
+    }
   };
 
   const puzzleKeys = Object.keys(puzzles);
@@ -116,7 +123,6 @@ const usePuzzleGame = () => {
     handlePuzzleSelect(nextKey);
   };
 
-
   const triggerHint = () => {
     if (hintActive) return; // block new hints
 
@@ -124,10 +130,10 @@ const usePuzzleGame = () => {
     setShowHint(true);
 
     setTimeout(() => {
-      setHintActive(false)
+      setHintActive(false);
       setShowHint(false);
     }, 2000);
-  }
+  };
 
   return {
     GRID,
@@ -145,7 +151,7 @@ const usePuzzleGame = () => {
     randomPuzzle,
     setPositions,
     shuffleBoard,
-    showHint, 
+    showHint,
     triggerHint,
     hintActive,
   };
