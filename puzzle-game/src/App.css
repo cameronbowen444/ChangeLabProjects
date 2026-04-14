@@ -303,6 +303,8 @@ body {
   padding: 10px;
   border-top: 1px solid rgb(237, 237, 237);
   border-bottom: 1px solid rgb(237, 237, 237);
+  position: relative;
+  z-index: 4;
 }
 
 .featured {
@@ -382,7 +384,6 @@ body {
   height: 300px;
   overflow: hidden;
   margin: 20px auto;
-  border: 1px solid rgb(219, 219, 219);
   cursor: pointer;
 }
 .image-box-home img {
@@ -413,6 +414,25 @@ body {
   color: black;
 }
 
+.fuji-img {
+  position: absolute;
+  left: 0;
+  top: 595px;
+  width: 150px;
+  z-index: 2;
+}
+.home-writing {
+  font-size: 30px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  transform: rotate(-40deg);
+  font-weight: bold;
+}
+.green{
+  color: #27e96e;
+}
+
 @media screen and (max-width: 750px) {
   .items {
     flex-direction: column;
@@ -438,6 +458,13 @@ body {
   }
   .logo{
     width: 60px;
+  }
+  .fuji-img {
+    width: 100px;
+    top: 585px;
+  }
+  .home-writing {
+    font-size: 15px;
   }
 }
 

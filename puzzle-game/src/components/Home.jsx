@@ -3,6 +3,7 @@ import { puzzles } from "../util/data";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
+import fuji from "../assets/fuji.png";
 
 const Home = () => {
   const puzzleList = Object.values(puzzles);
@@ -20,6 +21,11 @@ const Home = () => {
     <>
       {/* TOP */}
       <div>
+        <div className="home-writing">
+          <span>全部のパズルを</span>
+          <span className="green">解けるか。</span>
+        </div>
+        <img src={fuji} alt="" className="fuji-img" />
         <div className="home-btns">
           <Link to={"/puzzle"} className="home-btn">
             <span>プレイ</span>
