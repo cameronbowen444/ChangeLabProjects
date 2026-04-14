@@ -317,7 +317,7 @@ body {
 }
 .items {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .title2 {
@@ -393,7 +393,8 @@ body {
 
 .image-box {
   display: block;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   overflow: hidden;
   margin: 10px;
 }
@@ -412,7 +413,7 @@ body {
   color: black;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .items {
     flex-direction: column;
   }
