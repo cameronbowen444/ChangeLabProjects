@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Modal from "./Modal";
 import PuzzleDragLayer from "./PuzzleDragLayer";
 import PuzzleBoard from "./PuzzleBoard";
@@ -8,9 +9,19 @@ import { puzzles } from "../util/data";
 import { FaShuffle } from "react-icons/fa6";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { MdOutlineRestartAlt } from "react-icons/md";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 
 const PuzzleGame = () => {
+  const [showJapanese, setShowJapanese] = useState(true);
+
+  useEffect(() => {
+    document.body.classList.add("no-scroll");
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, []);
+
   const location = useLocation();
   const puzzleIdFromHome = location.state?.puzzleId || "puzzle1";
 
@@ -35,8 +46,21 @@ const PuzzleGame = () => {
   } = usePuzzleGame(puzzleIdFromHome);
 
   return (
-    <>
+    <div className="puzzle">
       {won && <Modal isOpen={isOpen} onClose={handleClose} />}
+      <div className="puzzle-title">
+        <h3 className="title">
+          {showJapanese ? '日本な久片' : "Pieces of Japan"}
+        </h3>
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.9 }}
+          className="button"
+          onClick={() => setShowJapanese(!showJapanese)}
+        >
+          {showJapanese ? "Show English" : "Show Japanese"}
+        </motion.button>
+      </div>
 
       <PuzzleDragLayer />
       <div className="game-container">
@@ -50,24 +74,7 @@ const PuzzleGame = () => {
           groups={groups}
           showHint={showHint}
         />
-
-        <div className="puzzle-selection">
-          <div className="custom-select">
-            <motion.select
-              whileHover={{ scale: 1.02 }}
-              id="puzzle"
-              name="puzzle"
-              value={selectedPuzzle}
-              onChange={(e) => handlePuzzleSelect(e.target.value)}
-              disabled={hintActive}
-            >
-              {Object.values(puzzles).map((puzzleObj) => (
-                <option key={puzzleObj.id} value={puzzleObj.id}>
-                  {puzzleObj.name}
-                </option>
-              ))}
-            </motion.select>
-          </div>
+        <Link to="/" className="left-button">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.9 }}
@@ -75,20 +82,32 @@ const PuzzleGame = () => {
             onClick={randomPuzzle}
             disabled={hintActive}
           >
-            <p>
-              <FaShuffle />
-            </p>
+            <h5>
+              {showJapanese ? (
+                <div className="japanese">家</div>
+              ) : (
+                <div>Home</div>
+              )}
+              {/* <IoMdArrowRoundBack  /> */}
+            </h5>
           </motion.button>
+        </Link>
+        <div className="right-buttons">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.9 }}
             className="button"
-            onClick={triggerHint}
+            onClick={randomPuzzle}
             disabled={hintActive}
           >
-            <p>
-              <HiOutlineLightBulb />
-            </p>
+            <h5 className="btn-content">
+              {showJapanese ? (
+                <div className="japanese">シャッフル</div>
+              ) : (
+                <div>Shuffle</div>
+              )}
+              {/* <FaShuffle /> */}
+            </h5>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -97,18 +116,54 @@ const PuzzleGame = () => {
             onClick={shuffleBoard}
             disabled={hintActive}
           >
-            <p>
-              <MdOutlineRestartAlt />
-            </p>
+            <h5 className="btn-content">
+              {showJapanese ? (
+                <div className="japanese">リスタート</div>
+              ) : (
+                <div>Restart</div>
+              )}
+              {/* <MdOutlineRestartAlt  /> */}
+            </h5>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
+            className="button"
+            onClick={triggerHint}
+            disabled={hintActive}
+          >
+            <h5 className="btn-content">
+              {showJapanese ? (
+                <div className="japanese">ヒント</div>
+              ) : (
+                <div>Hint</div>
+              )}
+              {/* <HiOutlineLightBulb /> */}
+            </h5>
           </motion.button>
         </div>
-
-        <div className="puzzle-info">
-          <h2>{puzzles[selectedPuzzle].title}</h2>
-          <p>{puzzles[selectedPuzzle].description}</p>
+        <div className="custom-select">
+          <motion.select
+            whileHover={{ scale: 1.02 }}
+            id="puzzle"
+            name="puzzle"
+            value={selectedPuzzle}
+            onChange={(e) => handlePuzzleSelect(e.target.value)}
+            disabled={hintActive}
+          >
+            {Object.values(puzzles).map((puzzleObj) => (
+              <option key={puzzleObj.id} value={puzzleObj.id}>
+                {showJapanese ? puzzleObj.name : puzzleObj.title}
+              </option>
+            ))}
+          </motion.select>
         </div>
+        {/* <div className="puzzle-info">
+            <h2>{puzzles[selectedPuzzle].title}</h2>
+            <p>{puzzles[selectedPuzzle].description}</p>
+          </div> */}
       </div>
-    </>
+    </div>
   );
 };
 

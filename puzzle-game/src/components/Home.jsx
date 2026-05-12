@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <>
       {/* TOP */}
-      <div>
+      <div className="home">
         <div className="home-writing">
           <span>全部のパズルを</span>
           <span className="green">解けるか。</span>

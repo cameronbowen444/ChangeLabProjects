@@ -13,11 +13,15 @@ const Header = () => {
         </Link>
         <div>
           <div className="">
-            {location.pathname === "/" && <h1 className="title2">ようこそ!</h1>}
-            <h3 className="title">
-              日本な久片
-              <span className="close">Pieces of Japan</span>
-            </h3>
+            {location.pathname === "/" && (
+              <>
+                <h1 className="title2">ようこそ!</h1>{" "}
+                <h3 className="title">
+                  日本な久片
+                  <span> - Pieces of Japan</span>
+                </h3>
+              </>
+            )}
           </div>
         </div>
       </div>

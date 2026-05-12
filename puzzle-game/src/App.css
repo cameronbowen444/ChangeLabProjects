@@ -23,7 +23,6 @@ body {
     #acb6e5
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   position: relative;
-  min-height: 100vh;
 }
 
 .title {
@@ -37,12 +36,15 @@ body {
     2px 3px 0px #343434,
     2px 6px 0px rgba(0, 0, 0, 0.15);
   padding: 10px;
+  
 }
 
 .game-container {
   margin: 10px auto;
   max-width: fit-content;
   padding: 0px;
+  position: relative;
+
 }
 
 .puzzle-container {
@@ -62,7 +64,21 @@ body {
     rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-
+body.no-scroll {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+.puzzle-title {
+  width: min(96vw, 460px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+.puzzle-title .title {
+  text-align: left;
+}
 
 .puzzle-container,
 .puzzle-piece {
@@ -224,45 +240,47 @@ body {
   display: flex;
   width: 200px;
 }
+.left-button {
+  position: absolute;
+  right: 100%;
+  top: 0;
 
-.puzzle-selection {
-  width: 100%;
-  display: flex;
-  justify-items: center;
-  align-items: center;
 }
+.left-button button {
+  margin-right: 0;
+}
+
+.right-buttons {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.right-buttons button {
+  margin-left: 0;
+  
+}
+
 .button {
-  flex: 1;
-  width: 100%;
-  margin: 10px 3px;
-  padding: 10px;
-  border: 2px solid white;
+  padding: 5px 10px;
+  border: none;
   background-color: #217389;
   color: white;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  box-shadow:
-    rgba(0, 0, 0, 0.19) 0px 10px 20px,
-    rgba(0, 0, 0, 0.23) 0px 6px 6px;
   text-shadow:
     1px 2px 0px #616161,
     1px 3px 0px rgba(0, 0, 0, 0.15);
 }
 
-.custom-select {
-  width: 100%;
-  padding: 5px;
-  flex: 5;
-}
-
 .custom-select select {
-  width: 100%;
-  margin: 10px -10px;
-  padding: 10px;
+  padding: 7px 0;
   background-color: #fff;
-  border: 2px solid white;
+  border: none;
   border-radius: 0.25rem;
   color: #000;
   cursor: pointer;
@@ -271,14 +289,13 @@ body {
   background-color: #217389;
   color: white;
   font-family: "Poppins", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 500;
-  box-shadow:
-    rgba(0, 0, 0, 0.19) 0px 10px 20px,
-    rgba(0, 0, 0, 0.23) 0px 6px 6px;
   text-shadow:
     1px 2px 0px #616161,
     1px 3px 0px rgba(0, 0, 0, 0.15);
+  width: min(96vw, 460px);
+  margin: 10px;
 }
 
 .puzzle-hint {
@@ -334,10 +351,6 @@ body {
     2px 6px 0px rgba(0, 0, 0, 0.15);
 }
 
-.close {
-  margin-top: -12px;
-  display: block;
-}
 
 .home-btns {
   margin: 20px auto;
@@ -432,6 +445,13 @@ body {
 .green{
   color: #27e96e;
 }
+.btn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
 
 @media screen and (max-width: 750px) {
   .items {
@@ -446,6 +466,16 @@ body {
   .puzzle-container {
     width: min(96vw, 320px);
     height: min(96vw, 450px);
+  }
+  .custom-select select {
+    width: min(96vw, 320px);
+  }
+  .right-buttons {
+    position: static;
+    margin: 12px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
   .title {
     font-size: 1.5rem;
