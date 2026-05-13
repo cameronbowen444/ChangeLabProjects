@@ -36,7 +36,6 @@ body {
     2px 3px 0px #343434,
     2px 6px 0px rgba(0, 0, 0, 0.15);
   padding: 10px;
-  
 }
 
 .game-container {
@@ -44,7 +43,6 @@ body {
   max-width: fit-content;
   padding: 0px;
   position: relative;
-
 }
 
 .puzzle-container {
@@ -69,22 +67,28 @@ body.no-scroll {
   overscroll-behavior: none;
   touch-action: none;
 }
-.puzzle-title {
-  width: min(96vw, 460px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  white-space: nowrap;
-}
-.puzzle-title .title {
-  text-align: left;
-}
 
 .puzzle-container,
 .puzzle-piece {
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+}
+.puzzle-title {
+  position: relative;
+  width: min(96vw, 460px);
+}
+
+.puzzle-title .title {
+  margin-bottom: -15px;
+}
+
+.top-button {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  margin-top: 20px;
 }
 
 .puzzle-piece {
@@ -244,7 +248,6 @@ body.no-scroll {
   position: absolute;
   right: 100%;
   top: 0;
-
 }
 .left-button button {
   margin-right: 0;
@@ -260,7 +263,6 @@ body.no-scroll {
 }
 .right-buttons button {
   margin-left: 0;
-  
 }
 
 .button {
@@ -277,12 +279,17 @@ body.no-scroll {
     1px 3px 0px rgba(0, 0, 0, 0.15);
 }
 
+.custom-select {
+  position: relative;
+  width: min(96vw, 460px);
+}
+
 .custom-select select {
-  padding: 7px 0;
+  width: 100%;
+  padding: 7px 5px;
   background-color: #fff;
   border: none;
   border-radius: 0.25rem;
-  color: #000;
   cursor: pointer;
   outline: none;
   text-align: center;
@@ -294,8 +301,19 @@ body.no-scroll {
   text-shadow:
     1px 2px 0px #616161,
     1px 3px 0px rgba(0, 0, 0, 0.15);
-  width: min(96vw, 460px);
-  margin: 10px;
+  margin: 10px auto;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align-last: center;
+}
+.custom-select::after {
+  content: "⌄";
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  color: white;
+  pointer-events: none;
+  font-size: 1.2rem;
 }
 
 .puzzle-hint {
@@ -351,7 +369,6 @@ body.no-scroll {
     2px 6px 0px rgba(0, 0, 0, 0.15);
 }
 
-
 .home-btns {
   margin: 20px auto;
   width: 200px;
@@ -359,7 +376,7 @@ body.no-scroll {
 
 .home-btn {
   display: block;
-  margin: 10px;
+  margin: 10px auto;
   padding: 2px 1px;
   background-color: #eaeaea;
   color: black;
@@ -446,7 +463,7 @@ body.no-scroll {
   transform: rotate(-40deg);
   font-weight: bold;
 }
-.green{
+.green {
   color: #27e96e;
 }
 .btn-content {
@@ -507,12 +524,11 @@ body.no-scroll {
   cursor: pointer;
 }
 
-
 @media screen and (max-width: 750px) {
   .items {
     flex-direction: column;
   }
-  .logo{
+  .logo {
     width: 75px;
   }
 }
@@ -522,7 +538,7 @@ body.no-scroll {
     width: min(96vw, 320px);
     height: min(96vw, 450px);
   }
-  .custom-select select {
+  .custom-select {
     width: min(96vw, 320px);
   }
   .right-buttons {
@@ -531,6 +547,17 @@ body.no-scroll {
     display: flex;
     flex-direction: row;
     justify-content: center;
+  }
+  .puzzle-title {
+    width: min(96vw, 320px);
+  }
+  .puzzle-title .title {
+    font-size: 1.3rem;
+  }
+  .top-button {
+    margin-top: 7px;
+    margin-right: -20px;
+    font-size: 1.1rem;
   }
   .title {
     font-size: 1.5rem;
@@ -541,8 +568,8 @@ body.no-scroll {
   .hide {
     display: none;
   }
-  .logo{
-    width: 60px;
+  .logo {
+    width: 40px;
   }
   .fuji-img {
     width: 100px;
@@ -551,8 +578,22 @@ body.no-scroll {
   .home-writing {
     font-size: 15px;
   }
-  .logo{
+  .logo {
     display: none;
+  }
+  .instructions-content {
+    width: 80%;
   }
 }
 
+@media screen and (max-width: 500px) {
+  .left-button {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 2px;
+  }
+  .button {
+    font-size: 1.2rem;
+  }
+}

@@ -61,10 +61,10 @@ const PuzzleGame = () => {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.9 }}
-          className="button"
+          className="button top-button"
           onClick={() => setShowJapanese(!showJapanese)}
         >
-          {showJapanese ? "Show English" : "Show Japanese"}
+          {showJapanese ? "English" : "日本語"}
         </motion.button>
       </div>
 
@@ -155,7 +155,7 @@ const PuzzleGame = () => {
             disabled={hintActive}
           >
             <h5 className="button-content">
-              <span>{showJapanese ? "説明" : "Instructions"}</span>
+              <span>{showJapanese ? "説明書" : "Instructions"}</span>
             </h5>
           </motion.button>
         </div>

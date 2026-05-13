@@ -96,7 +96,7 @@ const PuzzleBoard = ({
             height: usedH,
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.75 }}
+          animate={{ opacity: 0.95 }}
           exit={{ opacity: 0 }}
           transition={{
             opacity: { duration: 0.5, ease: "easeOut" },

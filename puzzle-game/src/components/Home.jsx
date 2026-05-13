@@ -42,8 +42,8 @@ const Home = () => {
             className="home-btn"
             onClick={() => setInstructionsOpen(true)}
           >
-            <span>設定</span>
-            <span>SETTINGS</span>
+            <span>説明書</span>
+            <span>INSTRUCTIONS</span>
           </button>
         </div>
 
@@ -152,8 +152,8 @@ const Home = () => {
       <div className="bottom">
         <div>
           <h3 className="title">
-            日本な久片
-            <span className="close">Pieces of Japan</span>
+            日本な久片 
+            <span className="close"> Pieces of Japan</span>
           </h3>
         </div>
         <div className="card">
