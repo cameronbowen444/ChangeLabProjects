@@ -477,7 +477,7 @@ body.no-scroll {
   border: none;
   padding: 0;
   background: transparent;
-  margin: 10% auto;
+  margin: auto;
 }
 
 .instructions-modal::backdrop {
@@ -486,6 +486,7 @@ body.no-scroll {
 
 .instructions-content {
   width: min(90vw, 430px);
+  height: 60vh;
   background: #217389;
   color: white;
   padding: 24px;
@@ -495,6 +496,33 @@ body.no-scroll {
   box-shadow:
     rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.instructions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.instructions-header h2 {
+  margin: 0;
+}
+
+.translate-btn {
+  padding: 6px 10px;
+  border: 2px solid white;
+  border-radius: 6px;
+  background: white;
+  color: #217389;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .instructions-content h2 {
@@ -505,11 +533,53 @@ body.no-scroll {
 .instructions-text {
   text-align: left;
   margin: 0;
+  overflow-y: scroll;
+  max-height: 40vh;
+  flex: 1;
+  padding: 10px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.226);
+  border-radius: 10px;
+
 }
+.instructions-text::-webkit-scrollbar {
+  width: 10px;
+}
+.instructions-scroll {
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.instructions-text::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+.instructions-text::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 10px;
+}
+
+.instructions-text::-webkit-scrollbar-thumb:hover {
+  background: #e6e6e6;
+}
+
 
 .instructions-text p {
   margin: 10px 0;
   line-height: 1.4;
+}
+.instructions-text p,
+.instructions-text li {
+  margin: 10px 0;
+  line-height: 1.4;
+  
+}
+.instructions-list li span{
+  padding: 3px 7px;
+  border-radius: 5px;
+  background-color: rgb(20, 84, 126);
 }
 
 .instructions-close {
