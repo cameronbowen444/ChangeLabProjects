@@ -11,9 +11,11 @@ import { HiOutlineLightBulb } from "react-icons/hi";
 import { MdOutlineRestartAlt } from "react-icons/md";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useLocation } from "react-router-dom";
+import InstructionsModal from "./InstructionsModal";
 
 const PuzzleGame = () => {
   const [showJapanese, setShowJapanese] = useState(true);
+  const [instructionsOpen, setInstructionsOpen] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("no-scroll");
@@ -46,11 +48,15 @@ const PuzzleGame = () => {
   } = usePuzzleGame(puzzleIdFromHome);
 
   return (
-    <div className="puzzle">
+    <>
+      <InstructionsModal
+        isOpen={instructionsOpen}
+        onClose={() => setInstructionsOpen(false)}
+      />
       {won && <Modal isOpen={isOpen} onClose={handleClose} />}
       <div className="puzzle-title">
         <h3 className="title">
-          {showJapanese ? '日本な久片' : "Pieces of Japan"}
+          {showJapanese ? "日本な久片" : "Pieces of Japan"}
         </h3>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -141,6 +147,17 @@ const PuzzleGame = () => {
               {/* <HiOutlineLightBulb /> */}
             </h5>
           </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
+            className="button"
+            onClick={() => setInstructionsOpen(true)}
+            disabled={hintActive}
+          >
+            <h5 className="button-content">
+              <span>{showJapanese ? "説明" : "Instructions"}</span>
+            </h5>
+          </motion.button>
         </div>
         <div className="custom-select">
           <motion.select
@@ -163,7 +180,7 @@ const PuzzleGame = () => {
             <p>{puzzles[selectedPuzzle].description}</p>
           </div> */}
       </div>
-    </div>
+    </>
   );
 };
 

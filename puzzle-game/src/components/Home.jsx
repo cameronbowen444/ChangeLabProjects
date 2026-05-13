@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import fuji from "../assets/fuji.png";
+import InstructionsModal from "./InstructionsModal";
 
 const Home = () => {
   const puzzleList = Object.values(puzzles);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [instructionsOpen, setInstructionsOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,6 +23,10 @@ const Home = () => {
     <>
       {/* TOP */}
       <div className="home">
+        <InstructionsModal
+          isOpen={instructionsOpen}
+          onClose={() => setInstructionsOpen(false)}
+        />
         <div className="home-writing">
           <span>全部のパズルを</span>
           <span className="green">解けるか。</span>
@@ -32,10 +38,13 @@ const Home = () => {
             <span>PLAY</span>
           </Link>
 
-          <Link to={""} className="home-btn">
+          <button
+            className="home-btn"
+            onClick={() => setInstructionsOpen(true)}
+          >
             <span>設定</span>
             <span>SETTINGS</span>
-          </Link>
+          </button>
         </div>
 
         <Link
